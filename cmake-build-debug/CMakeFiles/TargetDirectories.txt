@@ -1,0 +1,3 @@
+/root/CLionProjects/toc3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/root/CLionProjects/toc3/cmake-build-debug/CMakeFiles/toc3.dir
+/root/CLionProjects/toc3/cmake-build-debug/CMakeFiles/edit_cache.dir

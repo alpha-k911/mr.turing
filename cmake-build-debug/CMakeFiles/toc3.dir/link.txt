@@ -1,0 +1,1 @@
+/usr/bin/g++  -g   CMakeFiles/toc3.dir/main.cpp.o  -o toc3 
