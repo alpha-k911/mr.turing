@@ -9,6 +9,8 @@ class turing {
     int i;
 };
 
+unordered_set<string> final_states;
+
 //void proceed(string inp, int pos, int tape_ptr, string ini_state,multimap<string,string> &state_map, vector<char> &tape){
 //
 //}
@@ -18,9 +20,10 @@ void proceed(string inp, int inp_pos, int tape_ptr, string state,multimap<string
     cout<<"Proceeding..."<<endl;
     string r_transition,nxt_state;
 //    while(inp_pos != inp.length()){
-    while(tape_ptr != tape.length()){
+    while(tape_ptr != tape.length() && (final_states.find(state) == final_states.end())){
         sleep(1);
         cout<<tape<<endl;
+//        cout<<tape<<" : "<<state<<endl;
         tmp = safe;
         tmp[tape_ptr] = '^';
         cout<<tmp<<endl;
@@ -53,7 +56,9 @@ void proceed(string inp, int inp_pos, int tape_ptr, string state,multimap<string
             }
         }
     }
+    cout<<"ExiTing..."<<endl;
 }
+
 int main() {
     cout << "Hello, World!" << endl;
     string a,b,state,inp,fin,out,dir;
@@ -69,22 +74,28 @@ int main() {
     //states are in the form of qi
     multimap<string,string> state_map;
     state = "";
-    while(state != "^^") {
-        cin >> state >> inp;
-        if(state != "^^"){
-            cin >> fin >> out >> dir;
+    while(state != "END") {
+        cin >> state;
+        if(state != "IN" && state != "FINAL"){
+            cin >> inp >> fin >> out >> dir;
             state_map.insert({state+inp,fin+out+dir});
-        }else{
+        }else if(state == "IN"){
 //            for(i = 0; i < inp.length(); i++){
 //                tape.push_back(inp[i]);
 //            }
+            cin >> inp;
             tape = inp;
             tape = 'B' + tape + 'B';
             //for knowing the other end, we will extend the end if states reach here
 //            tape.push_back('B');
+        }else if(state == "FINAL"){
+            while(state != "END"){
+                cin>>state;
+                if(state != "END") final_states.insert(state);
+            }
         }
     }
-    cout<<"done with input";
+    cout<<"done with input"<<endl;
 
     proceed(inp,0,1,"q0",state_map,tape);
 
