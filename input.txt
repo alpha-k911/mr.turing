@@ -19,5 +19,27 @@ q0 Y q3 Y R
 q2 1 q3 1 R
 q3 Y q3 Y R
 q3 B q4 B R
-IN 000111
+IN 0000111
 FINAL q4 END
+
+
+
+q0 0 q1 X R
+q1 0 q1 0 R
+q1 Y q1 Y R
+q1 1 q2 Y L
+q2 Y q2 Y L
+q2 0 q2 0 L
+q2 X q0 X R
+q0 Y q3 Y R
+q2 1 q3 1 R
+q3 Y q3 Y R
+q3 B q4 B R
+q4 B q5 B L
+q4 B q6 B R
+q6 B q7 B L
+q6 B q8 B L
+IN 01
+FINAL q4 q1 END
+
+

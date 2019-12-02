@@ -36,6 +36,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
@@ -68,7 +69,9 @@
       <option name="presentableId" value="Default" />
       <updated>1575045649601</updated>
       <workItem from="1575045650760" duration="3669000" />
-      <workItem from="1575137006466" duration="4691000" />
+      <workItem from="1575137006466" duration="4867000" />
+      <workItem from="1575255564656" duration="6262000" />
+      <workItem from="1575285157368" duration="1800000" />
     </task>
     <task id="LOCAL-00001" summary="with_vector">
       <created>1575138084982</created>
@@ -84,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575140591555</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="deterministic with final states">
+      <created>1575141793969</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575141793969</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,25 +116,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="with_vector" />
     <MESSAGE value="deterministic" />
-    <option name="LAST_COMMIT_MESSAGE" value="deterministic" />
+    <MESSAGE value="deterministic with final states" />
+    <option name="LAST_COMMIT_MESSAGE" value="deterministic with final states" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>18</line>
+          <line>24</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>82</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>92</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

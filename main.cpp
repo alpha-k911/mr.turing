@@ -11,30 +11,45 @@ class turing {
 
 unordered_set<string> final_states;
 
+void print_tabs(int n){
+    for(int i = 0; i < n; i++){
+        cout<<"    ";
+    }
+}
+
 //void proceed(string inp, int pos, int tape_ptr, string ini_state,multimap<string,string> &state_map, vector<char> &tape){
 //
 //}
 
-void proceed(string inp, int inp_pos, int tape_ptr, string state,multimap<string,string> &state_map, string tape){
-    string safe = "                    ",tmp;
-    cout<<"Proceeding..."<<endl;
-    string r_transition,nxt_state;
+void proceed(int tape_ptr, string state,multimap<string,string> &state_map, string tape,int tabs){
+    string spaces = "                    ",tmp,tmp_tape,l_map;
+    bool done = false, final = false;
+    int r_tr_len,tmp_tape_ptr;
+
+    print_tabs(tabs);
+    cout<<"Proceeding...>>>>"<<endl;
+
+    string r_transition,tmp_r_transition,nxt_state,tmp_state;
 //    while(inp_pos != inp.length()){
-    while(tape_ptr != tape.length() && (final_states.find(state) == final_states.end())){
+    while(tape_ptr != tape.length() && !done){
         sleep(1);
-        cout<<tape<<endl;
-//        cout<<tape<<" : "<<state<<endl;
-        tmp = safe;
+
+        print_tabs(tabs);
+        cout<<tape<<" : "<<state<<" "<<tabs<<endl;
+
+        tmp = spaces;
         tmp[tape_ptr] = '^';
+
+        print_tabs(tabs);
         cout<<tmp<<endl;
 
-        string l_map = state + tape[tape_ptr];
+        l_map = state + tape[tape_ptr];
 
         if(state_map.find(l_map) != state_map.end()){
             if(state_map.count(l_map) == 1){ // for deterministic
                 auto it = state_map.find(l_map);
                 r_transition = it -> second;
-                int r_tr_len = r_transition.length();
+                r_tr_len = r_transition.length();
                 state = r_transition.substr(0,r_transition.length() - 2);
 
                 //changing value in tape according to state
@@ -51,16 +66,65 @@ void proceed(string inp, int inp_pos, int tape_ptr, string state,multimap<string
                 }else if(tape_ptr == 0){
                     tape = 'B' + tape;
                 }
-            }else{ //for non deterministic
+            }else if(state_map.count(l_map) > 1){ //for non deterministic
+                for(auto itt = state_map.find(l_map); itt != state_map.end(); itt++){
+                    if(itt->first == l_map) {
 
+                        print_tabs(tabs);
+                        cout << itt->first << " -> " << itt->second << endl;
+
+                        tmp_tape = tape;
+                        tmp_tape_ptr = tape_ptr;
+                        tmp_r_transition = itt->second;
+                        r_tr_len = tmp_r_transition.length();
+                        tmp_state = tmp_r_transition.substr(0, tmp_r_transition.length() - 2);
+
+                        //changing value in tape according to state
+                        tmp_tape[tmp_tape_ptr] = tmp_r_transition[r_tr_len - 2];
+
+                        //moving to next transition
+                        if (tmp_r_transition[r_tr_len - 1] == 'R') {
+                            tmp_tape_ptr++;
+                        } else {
+                            tmp_tape_ptr--;
+                        }
+                        if (tmp_tape_ptr == tmp_tape.length() - 1) {
+                            tmp_tape = tmp_tape + 'B';
+                        } else if (tape_ptr == 0) {
+                            tmp_tape = 'B' + tmp_tape;
+                        }
+                        proceed(tmp_tape_ptr, tmp_state, state_map, tmp_tape, tabs + 1);
+
+                        //backtracking
+                        print_tabs(tabs);
+                        cout << "    <<<<Backtracking<<<<" << endl;
+                    }
+                }
+                done = true;
             }
+        }else{
+            final = true;
+            done = true;
         }
     }
-    cout<<"ExiTing..."<<endl;
+
+//    print_tabs(tabs);
+//    cout<<"ExiTing..."<<endl;
+    if(final){
+        print_tabs(tabs);
+        cout<<tape<<endl;
+
+        print_tabs(tabs);
+        if(final_states.find(state) != final_states.end()){
+            cout<<"Accepted"<<endl;
+        }else{
+            cout<<"Rejected"<<endl;
+        }
+    }
 }
 
 int main() {
-    cout << "Hello, World!" << endl;
+    cout << "Turing Machine Simulation!!!" << endl;
     string a,b,state,inp,fin,out,dir;
     int i,j,k,l,p,q;
 
@@ -96,9 +160,9 @@ int main() {
         }
     }
     cout<<"done with input"<<endl;
-
-    proceed(inp,0,1,"q0",state_map,tape);
-
-
+    int tape_ptr = 1;
+    int tabs = 0;
+    string initial_state = "q0";
+    proceed(tape_ptr,initial_state,state_map,tape,tabs);
     return 0;
 }
